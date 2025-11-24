@@ -36,7 +36,7 @@ class Cell:
         self.col=col
         self.screen=screen
 
-    #To be added
+    #To be added; a=0 are placeholders
     def set_cell_value(self,value):
         a=0
         #setter for this cell's value
@@ -55,21 +55,38 @@ class Cell:
 def start_screen():
     difficulty=0
     screen = pygame.display.set_mode((600, 600))
-    screen.fill((255, 255, 255))
+    screen.fill((54, 100, 117)) #screen color
+
+    #start screen text
+    start_font1 = pygame.font.Font(None, 90)
+    start_surf1 = start_font1.render("Welcome to Sudoku", 0, (0, 0, 0))
+    start_rect1 = start_surf1.get_rect(center=(300,170))
+
+    start_font=pygame.font.Font(None,40)
+    start_surf=start_font.render("Select Game Mode:",0,(0,0,0))
+    start_rect=start_surf.get_rect(center=(600//2,600//2-50))
 
     #loads image
     b1=pygame.image.load("button1.png")
     b2=pygame.image.load("button2.png")
     b3=pygame.image.load("button3.png")
+
+    #postions/draws image/text
     screen.blit(b1,(-200,100))
     screen.blit(b2,(0,100))
     screen.blit(b3,(200,100))
+    screen.blit(start_surf1, start_rect1)
+    screen.blit(start_surf,start_rect)
 
-    # for event in pygame.event.get():
-    #     if event.type==pygame.QUIT:
-    #         pygame.quit()
-    #         sys.exit()
-    #     elif event.type==pygame.MOUSEBUTTONDOWN:
+    for event in pygame.event.get():
+        if event.type==pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+        elif event.type==pygame.MOUSEBUTTONDOWN:
+            x,y=pygame.mouse.get_pos()
+            if b3.collidepoint((x,y)):
+                d=50
+
 
     #
     # if a==1:
@@ -81,15 +98,16 @@ def start_screen():
     # return difficulty
 
 
-c=Board(9*600,9*600,3)
+
 while True:
     d=start_screen()
     if d!=0:
         break
+c=Board(9*600,9*600,d)
 while True:
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
             pygame.quit()
             sys.exit()
-
+    c.draw()
     pygame.display.update()
