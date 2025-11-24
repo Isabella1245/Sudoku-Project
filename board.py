@@ -64,50 +64,49 @@ def start_screen():
 
     start_font=pygame.font.Font(None,40)
     start_surf=start_font.render("Select Game Mode:",0,(0,0,0))
-    start_rect=start_surf.get_rect(center=(600//2,600//2-50))
+    start_rect=start_surf.get_rect(center=(300,250))
 
     #loads image
     b1=pygame.image.load("button1.png")
+    b1_rect=b1.get_rect(center=(100,350))
     b2=pygame.image.load("button2.png")
+    b2_rect=b2.get_rect(center=(300,350))
     b3=pygame.image.load("button3.png")
+    b3_rect=b3.get_rect(center=(500,350))
 
     #postions/draws image/text
-    screen.blit(b1,(-200,100))
-    screen.blit(b2,(0,100))
-    screen.blit(b3,(200,100))
+    screen.blit(b1,b1_rect)
+    screen.blit(b2,b2_rect)
+    screen.blit(b3,b3_rect)
+
     screen.blit(start_surf1, start_rect1)
     screen.blit(start_surf,start_rect)
 
-    for event in pygame.event.get():
-        if event.type==pygame.QUIT:
-            pygame.quit()
-            sys.exit()
-        elif event.type==pygame.MOUSEBUTTONDOWN:
-            x,y=pygame.mouse.get_pos()
-            if b3.collidepoint((x,y)):
-                d=50
+    pygame.display.flip()
+    #need to fix so click registers with its spefic value
+    while True:
+        for event in pygame.event.get():
+            if event.type==pygame.MOUSEBUTTONDOWN:
+                mouse=pygame.mouse.get_pos()
+                if pygame.Rect.collidepoint(b3_rect,mouse):
+                    return 50
+                elif pygame.Rect.collidepoint(b2_rect,mouse):
+                    return 40
+                elif pygame.Rect.collidepoint(b1_rect,mouse):
+                    return 30
 
-
-    #
-    # if a==1:
-    #     difficulty=30
-    # elif a==1:
-    #     difficulty = 40
-    # elif a==50:
-    #     difficulty = 50
-    # return difficulty
-
-
-
-while True:
+start=True
+d=0
+while start:
     d=start_screen()
+    print(d)
     if d!=0:
+        start=False
         break
 c=Board(9*600,9*600,d)
-while True:
+while start==False:
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
             pygame.quit()
             sys.exit()
-    c.draw()
     pygame.display.update()
