@@ -1,4 +1,5 @@
 import pygame,sys
+pygame.init()
 
 class Board:
     screen = pygame.display.set_mode((600, 600))
@@ -37,19 +38,58 @@ class Cell:
 
     #To be added
     def set_cell_value(self,value):
+        a=0
         #setter for this cell's value
     def set_sketched_value(self,value):
+        a=0
         #sett for this cell's skecthed value
     def draw(self):
-        #draws the cell with value; if no value
-        #selected cell is outlined with red
+        a=0
+        #draws the cell with value; if no value -> no value should be showen
+
+
+# I will create pngs of the buttons
+# that when the player clicks on, it will set the diffculty/gamemode
+#-------------------------------------------------------------------
+#Starting Menu UI - returns diffculuty:
+def start_screen():
+    difficulty=0
+    screen = pygame.display.set_mode((600, 600))
+    screen.fill((255, 255, 255))
+
+    #loads image
+    b1=pygame.image.load("button1.png")
+    b2=pygame.image.load("button2.png")
+    b3=pygame.image.load("button3.png")
+    screen.blit(b1,(-200,100))
+    screen.blit(b2,(0,100))
+    screen.blit(b3,(200,100))
+
+    # for event in pygame.event.get():
+    #     if event.type==pygame.QUIT:
+    #         pygame.quit()
+    #         sys.exit()
+    #     elif event.type==pygame.MOUSEBUTTONDOWN:
+
+    #
+    # if a==1:
+    #     difficulty=30
+    # elif a==1:
+    #     difficulty = 40
+    # elif a==50:
+    #     difficulty = 50
+    # return difficulty
+
 
 c=Board(9*600,9*600,3)
-
+while True:
+    d=start_screen()
+    if d!=0:
+        break
 while True:
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
             pygame.quit()
             sys.exit()
-    c.draw()
+
     pygame.display.update()
