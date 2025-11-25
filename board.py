@@ -28,6 +28,25 @@ class Board:
         for k in range(10):
             pygame.draw.line(Board.screen, (0, 0, 0), (k * 200//3, 0), (k * 200//3, self.height), 2)
 
+    def select(self,row,col):
+        #marks current cell
+    def click(self,x,y):
+        #return x,y, else returns None
+    def clear(self):
+        #removed input from the user
+    def sketch(self,value):
+        #sets skecth value
+    def place_number(self,value):
+        #sets seketch vale to user entered function
+    def reset_to_original(self):
+        # resets all cells
+    def is_full(self):
+        #bla
+    def find_empty(self):
+        #s
+    def check_board(self):
+        #aa
+
 class Cell:
     def __init__(self,value,row,col,screen):
         self.value=value

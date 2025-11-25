@@ -1,3 +1,5 @@
+import sudoku_generator
+
 class SudokuGenerator:
     def __init__(self,removed_cells,row_length=9):
         self.row_length=row_length
