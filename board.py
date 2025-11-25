@@ -52,9 +52,8 @@ class Cell:
 # that when the player clicks on, it will set the diffculty/gamemode
 #-------------------------------------------------------------------
 #Starting Menu UI - returns diffculuty:
-def start_screen():
+def start_screen(screen):
     difficulty=0
-    screen = pygame.display.set_mode((600, 600))
     screen.fill((54, 100, 117)) #screen color
 
     #start screen text
@@ -97,13 +96,14 @@ def start_screen():
 
 start=True
 d=0
+c=Board(9*600,9*600,d)
 while start:
-    d=start_screen()
+    d=start_screen(Board.screen)
     print(d)
     if d!=0:
         start=False
         break
-c=Board(9*600,9*600,d)
+c.difficulty=d
 while start==False:
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
