@@ -29,7 +29,6 @@ class Board:
             pygame.draw.line(Board.screen, (0, 0, 0), (k * 200//3, 0), (k * 200//3, self.height), 2)
 
 class Cell:
-    screen = pygame.display.set_mode((600, 600))
     def __init__(self,value,row,col,screen):
         self.value=value
         self.row=row
@@ -82,20 +81,24 @@ def start_screen(screen):
     screen.blit(start_surf,start_rect)
 
     pygame.display.flip()
-    #need to fix so click registers with its spefic value
     while True:
         for event in pygame.event.get():
             if event.type==pygame.MOUSEBUTTONDOWN:
-                mouse=pygame.mouse.get_pos()
-                if pygame.Rect.collidepoint(b3_rect,mouse):
-                    return 50
-                elif pygame.Rect.collidepoint(b2_rect,mouse):
-                    return 40
-                elif pygame.Rect.collidepoint(b1_rect,mouse):
+                x,y=pygame.mouse.get_pos()
+                #to make it easier to understand
+                x=x//10
+                y=y//100
+                #the x and y values are the max & min of each button area
+                if 3<=x<=17 and 3<=y<=4: #b1
                     return 30
+                elif 23<=x<=37 and 3<=y<=4: #b2
+                    return 40
+                elif 43<=x<=57 and 3<=y<=4: #b3
+                    return 50
 
 start=True
 d=0
+#board.screen will be the main screen updated
 c=Board(9*600,9*600,d)
 while start:
     d=start_screen(Board.screen)
@@ -104,11 +107,12 @@ while start:
         start=False
         break
 c.difficulty=d
+c.draw()
 while start==False:
+
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
             pygame.quit()
             sys.exit()
-    c.draw()
-    # a version of c.draw numbers needed so values
+    # a version of c.draw with numbers needed so values gets updated/displayed
     pygame.display.update()
