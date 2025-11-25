@@ -109,4 +109,6 @@ while start==False:
         if event.type==pygame.QUIT:
             pygame.quit()
             sys.exit()
+    c.draw()
+    # a version of c.draw numbers needed so values
     pygame.display.update()
