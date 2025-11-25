@@ -105,11 +105,10 @@ while start:
     print(d)
     if d!=0:
         start=False
+        c.difficulty = d
+        c.draw()
         break
-c.difficulty=d
-c.draw()
 while start==False:
-
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
             pygame.quit()
